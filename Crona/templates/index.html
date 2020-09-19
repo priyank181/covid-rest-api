@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Corona Api</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <style>
+  .fakeimg {
+    background: #e9ecef;
+    max-width:400px;
+    margin:auto;
+    padding:1rem;
+    font-size:18px;
+  }
+  .form{
+    margin:3rem 0 0 0;
+  }
+  .badge{
+    font-size:18px !important;
+    font-weight:bold !important;
+    color:white !important;
+  }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Corona-Virus</a>
+      <ul id="nav-mobile" class="left down-on-med">
+        <li><a href="">Priyank</a></li>
+      </ul>
+    </div>
+  </nav>
+<div class="container" style="height:70vh;">
+    <div class="row">
+     <form method="POST" class="col s12 form">
+        {% csrf_token %}
+        <div class="row">
+        <div class="input-field col s12 m6 offset-m3">
+          <input name="country" class="input-field col s12" type="search" placeholder="Country">
+          <label for="icon_prefix">Country</label>
+        </div>
+        <button class="btn btn-outline-success input-field col s6 m4 offset-m4 offset-s3" type="submit">Search</button>
+      </div>
+       
+      </form>
+  </div>
+   
+    {% if serverError %}
+    <div class="row">
+      <div class="col s12 m6 offset-m3 center-align"> 
+          <blockquote>
+          <h1> Server Error</h1>
+          </blockquote>
+          <p> Will be back soon... </p>
+      </div>
+    </div>
+  {% else %}
+    <div class="fakeimg">
+        <ul class="collection">
+          {% if error %}
+            <p class="collection-item text-center justify-content-between align-items-center"> Please Provide Valid Country Name </p>
+          {% else %}
+            <li class="collection-item justify-content-between align-items-center">
+              {{country}} Cases
+              <span class="badge blue">{{ cases }} </span>
+            </li>
+            <li class="collection-item justify-content-between align-items-center">
+              {{country}} Today Cases
+              <span class="badge blue">{{ todayCases }}</span>
+            </li>
+            <li class="collection-item justify-content-between align-items-center">
+              {{country}} deaths
+              <span class="badge red">{{ deaths }}</span>
+            </li>
+            <li class="collection-item justify-content-between align-items-center">
+              {{country}} recovered
+              <span class="badge blue">{{ recovered }}</span>
+            </li>
+          {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+  </div>
+<script type="text/javascript" language="javascript">
+      var aax_size='728x90';
+      var aax_pubname = 'checktolearna-21';
+      var aax_src='302';
+    </script>
+    
+</body>
+</html>
